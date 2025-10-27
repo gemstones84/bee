@@ -1,16 +1,12 @@
 cmake_minimum_required(VERSION 3.27)
 project(bee)
 
-add_library(${PROJECT_NAME})
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
-target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_sources(${PROJECT_NAME} PRIVATE src/bee.cpp)
+include(GNUInstallDirs)
 
-if(NOT "${CMAKE_CXX_COMPILER_FRONTEND_VARIANT}" STREQUAL "MSVC")
-    target_compile_options(${PROJECT_NAME} PRIVATE
-        -Wall
-        -Wextra
-        -fno-exceptions
-        -fno-rtti
-    )
-endif()
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+option(BEE_BUILD_LIBRARY "Build static library" ON)
+
+add_subdirectory(bee)
